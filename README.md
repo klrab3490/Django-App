@@ -77,5 +77,3 @@ For questions or contributions, please contact:
 - **Email**: example@example.com
 - **GitHub**: [YourUsername](https://github.com/YourUsername)
 ```
-
-Let me know if you'd like to customize it further!
