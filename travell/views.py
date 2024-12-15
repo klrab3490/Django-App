@@ -15,3 +15,9 @@ def contact(request):
 
 def admins(request):
     return render(request, "admin/index.html")
+
+def edit_admin(request):
+    return render(request, "admin/edit.html")
+
+def view_admin(request):
+    return render(request, "admin/view.html")
