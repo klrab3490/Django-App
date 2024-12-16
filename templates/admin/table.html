@@ -1,0 +1,58 @@
+{% extends 'admin/base.html' %}
+{% load static %}
+
+{% block content %}
+    <!-- partial -->
+    <div class="main-panel">
+        <div class="content-wrapper">         
+            <!-- Table -->
+            <div class="row">
+                <div class="col-md-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+                            <p class="card-title">Table</p>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="table-responsive">
+                                        <table class="display expandable-table" style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID#</th>
+                                                    <th>Image</th>
+                                                    <th>Title</th>
+                                                    <th>Description</th>
+                                                    <th>Amount</th>
+                                                    <th>Options</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for item in data %}
+                                                    <tr>
+                                                        <td>{{ forloop.counter }}</td>
+                                                        <td><img src="{{ item.image }}" alt="{{ item.title }}" style="width: 100px; height: 100px; border-radius: 50%;"></td>
+                                                        <td>{{ item.title }}</td>
+                                                        <td>{{ item.description }}</td>
+                                                        <td>Rs. {{ item.amount }}/-</td>
+                                                        <td>
+                                                            <a href="{% url 'display' item.title %}" class="btn btn-primary mr-2">View</a>
+                                                            <a href="{% url 'edit' item.title %}" class="btn btn-primary mr-2">Edit</a>
+                                                            <a href="{% url 'delete' item.title %}" class="btn btn-danger text-black">Delete</a>
+                                                        </td>
+                                                    </tr>
+                                                {% empty %}
+                                                    <tr>
+                                                        <td colspan="6" class="text-center font-weight-bold text-2xl-center">No data available</td>
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

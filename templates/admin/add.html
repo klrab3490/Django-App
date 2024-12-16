@@ -7,10 +7,10 @@
             <!-- Page Header -->
             <div class="row mb-4">
                 <div class="col-md-12">
-                    <a href="{% url 'view' %}" class="text-black text-decoration-none d-flex align-items-center justify-content-start">
+                    <a href="{% url 'admins' %}" class="text-black text-decoration-none d-flex align-items-center justify-content-start">
                         <i class="fa-solid fa-chevron-left mr-2" style="font-size: 20px; color: black;"></i>
                         <p class="d-flex align-items-center justify-content-start">
-                            <h3 class="font-weight-bold mb-0">Edit Item</h3>
+                            <h3 class="font-weight-bold mb-0">Add Item</h3>
                         </p>                    
                     </a>
                     <p class="text-muted">Modify the details of the selected item below.</p>
@@ -22,43 +22,40 @@
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <div class="d-flex flex-wrap">
-                                <!-- Image Section -->
-                                <div class="pr-4 text-center">
-                                    <img src="{{ data.image }}" class="rounded shadow" alt="{{ data.title }}" 
-                                         style="height: 150px; width: 150px; object-fit: cover;">
-                                </div>
 
+                            <div class="d-flex flex-wrap">
                                 <!-- Details Section -->
                                 <div class="flex-grow-1">
                                     <form method="POST" enctype="multipart/form-data">
                                         {% csrf_token %}
 
+                                        {% if error %}
+                                            <div class="alert alert-danger">{{ error }}</div>
+                                        {% endif %}
+
+
                                         <div class="form-group">
                                             <label for="title" class="font-weight-bold">Title</label>
-                                            <input type="text" id="title" name="title" class="form-control" 
-                                                   value="{{ data.title }}" placeholder="Enter Title">
+                                            <input type="text" id="title" name="title" class="form-control" placeholder="Enter Title">
                                         </div>
 
                                         <div class="form-group">
                                             <label for="description" class="font-weight-bold">Description</label>
-                                            <textarea id="description" name="description" class="form-control" rows="3"
-                                                      placeholder="Enter Description">{{ data.desc }}</textarea>
+                                            <textarea id="description" name="description" class="form-control" rows="3" placeholder="Enter Description"></textarea>
                                         </div>
 
                                         <div class="form-group">
                                             <label for="amount" class="font-weight-bold">Amount</label>
-                                            <input type="text" id="amount" name="amount" class="form-control" 
-                                                   value="{{ data.amount }}" placeholder="Enter Amount">
+                                            <input type="text" id="amount" name="amount" class="form-control" placeholder="Enter Amount">
                                         </div>
 
-                                        <div class="form-group">
-                                            <label for="image-upload" class="font-weight-bold">Upload Image</label>
-                                            <input type="file" id="image-upload" name="image" accept="image/*" 
-                                                   class="form-control-file">
+                                        <div class="form-group d-flex justify-content-start align-items-center">
+                                            <label for="image-upload" class="btn btn-outline-primary">Upload Image</label>
+                                            <input type="file" id="image-upload" name="image" accept="image/*" style="display: none;" onchange="displayFileName()">
+                                            <span id="file-name"></span> 
                                         </div>
 
-                                        <button type="submit" class="btn btn-primary btn-block mt-4">Save Changes</button>
+                                        <button type="submit" class="btn btn-primary btn-block mt-4">Add Data</button>
                                     </form>
                                 </div>
                             </div>
@@ -69,4 +66,12 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function displayFileName() {
+            var fileInput = document.getElementById('image-upload');
+            var fileName = fileInput.files[0] ? fileInput.files[0].name : '';
+            document.getElementById('file-name').textContent = fileName;
+        }
+    </script>
 {% endblock %}

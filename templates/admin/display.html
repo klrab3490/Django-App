@@ -1,0 +1,50 @@
+{% extends 'admin/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="main-panel">
+        <div class="content-wrapper">  
+            <!-- Page Header -->
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <a href="{% url 'view' %}" class="text-black text-decoration-none d-flex align-items-center justify-content-start">
+                        <i class="fa-solid fa-chevron-left mr-2" style="font-size: 20px; color: black;"></i>
+                        <p class="d-flex align-items-center justify-content-start">
+                            <h3 class="font-weight-bold mb-0">Display Item</h3>
+                        </p>                    
+                    </a>
+                    <p class="text-muted">View the details of the selected item below.</p>
+                </div>
+            </div>
+
+            <!-- Item Details -->
+            <div class="row">
+                <div class="col-md-12 grid-margin stretch-card">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <div class="d-flex flex-wrap">
+                                <!-- Image Section -->
+                                <div class="pr-4 text-center">
+                                    <img src="{{ data.image }}" class="rounded shadow" alt="{{ data.title }}" style="height: 150px; width: 150px; object-fit: cover;">
+                                </div>
+
+                                <!-- Details Section -->
+                                <div class="d-flex flex-column justify-content-center">
+                                    <h1>{{ data.title }}</h1> <!-- Properly closed the h1 tag -->
+                                    <p>{{ data.description }}</p> <!-- Changed div to p for proper paragraph styling -->
+                                    <p>Price: Rs.{{ data.amount }}</p> <!-- Changed div to p for paragraph styling -->
+                                    <div class="d-flex">
+                                        <a href="{% url 'edit' data.title %}" class="btn btn-primary mr-2">Edit</a>
+                                        <a href="{% url 'delete' data.title %}" class="btn btn-danger">Delete</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
